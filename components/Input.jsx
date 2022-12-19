@@ -1,24 +1,43 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
-const Input = ({ label = "Etiqueta", placeholder = "Placeholder" }) => {
+const Input = ({
+  label = "Etiqueta",
+  placeholder = "Placeholder",
+  isPassword,
+}) => {
+  const [show, setShow] = useState(false);
   return (
     <View style={styles.contenedor}>
       <Text style={{ color: "white", fontWeight: "700", fontSize: 18 }}>
         {label}
       </Text>
-      <TextInput
-        placeholder={placeholder}
-        style={{
-          height: 47,
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
-          borderRadius: 11,
-          padding: 15,
-          color: "white",
-          shadowColor: "#9C9C9C",
-          marginVertical: 10,
-        }}
-        placeholderTextColor="#9C9C9C"
-      />
+      <View style={styles.contenedorInput}>
+        <TextInput
+          placeholder={placeholder}
+          style={{
+            color: "white",
+            shadowColor: "#9C9C9C",
+            flex: 8,
+            padding: 15,
+          }}
+          secureTextEntry={isPassword && show}
+          placeholderTextColor="#9C9C9C"
+        />
+        {isPassword && (
+          <Pressable
+            style={{
+              flex: 1,
+            }}
+            onPress={() => {
+              setShow(!show);
+            }}
+          >
+            <Icon size={16} color={"white"} name={show ? "eye" : "eye-off"} />
+          </Pressable>
+        )}
+      </View>
     </View>
   );
 };
@@ -28,6 +47,15 @@ const styles = StyleSheet.create({
     height: 78,
     width: "100%",
     marginVertical: 11,
+  },
+  contenedorInput: {
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    flexDirection: "row",
+    borderRadius: 11,
+    height: 47,
+    marginVertical: 10,
+    alignContent: "center",
+    alignItems: "center",
   },
 });
 

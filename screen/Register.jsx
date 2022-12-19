@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Input from "../components/Input";
 import Wrapper from "../components/Wrapper";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Register = () => {
   const nav = useNavigation();
@@ -12,17 +13,62 @@ const Register = () => {
         Sign up with one of following options
       </Text>
       <View style={styles.botones}>
-        <View style={styles.boton}>
+        <TouchableOpacity style={styles.boton}>
           <Icon style={{ color: "white" }} size={19.3} name="md-logo-apple" />
-        </View>
-        <View style={styles.boton}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.boton}>
           <Icon style={{ color: "white" }} size={19.3} name="md-logo-google" />
-        </View>
+        </TouchableOpacity>
       </View>
       <View>
-        <Input label="Name" />
-        <Input label="Email" />
-        <Input label="Password" />
+        <Input placeholder="Enter your name" label="Name" />
+        <Input placeholder="Enter your email" label="Email" />
+        <Input isPassword placeholder="Enter your password" label="Password" />
+      </View>
+      <TouchableOpacity style={{ marginVertical: 50 }}>
+        <LinearGradient
+          colors={["rgba(255, 114, 42, 0)", "#FF722A"]}
+          start={[0.0, 0.5]}
+          end={[0.2, 0.5]}
+          locations={[0.0, 1.0]}
+          style={styles.botonRegistro}
+        >
+          <Text>Create Account</Text>
+        </LinearGradient>
+      </TouchableOpacity>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "flex-end",
+          justifyContent: "center",
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 18,
+            color: "#9C9C9C",
+            lineHeight: 21,
+            fontWeight: "400",
+            textAlign: "center",
+            marginHorizontal: 5,
+          }}
+        >
+          Already have an account?
+        </Text>
+        <Text
+          style={{
+            fontSize: 18,
+            color: "white",
+            lineHeight: 21,
+            fontWeight: "700",
+            textAlign: "center",
+          }}
+          onPress={() => {
+            nav.navigate("ingreso");
+          }}
+        >
+          Login
+        </Text>
       </View>
     </Wrapper>
   );
@@ -41,6 +87,12 @@ const styles = StyleSheet.create({
     height: 57,
     width: 158,
     borderRadius: 11,
+  },
+  botonRegistro: {
+    height: 47,
+    borderRadius: 11,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

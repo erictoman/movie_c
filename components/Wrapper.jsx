@@ -8,7 +8,7 @@ const Wrapper = ({ children }) => {
 const styles = StyleSheet.create({
   wrapper: {
     marginHorizontal: 18,
-    marginTop: 9 + StatusBar.currentHeight,
+    marginTop: StatusBar.currentHeight,
     flex: 1,
     flexDirection: "column",
   },
