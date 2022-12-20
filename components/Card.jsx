@@ -1,12 +1,24 @@
-import { Image, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/core";
+import { Image, Pressable, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
-const Card = ({ height, width, image, title = "", rating = 0 }) => {
+const Card = ({
+  height,
+  width,
+  image,
+  title = "",
+  rating = 0,
+  onPress = null,
+}) => {
   return (
-    <View style={{ height: height, width: width, marginRight: 31 }}>
+    <Pressable
+      onPress={onPress}
+      style={{ height: height, width: width, marginRight: 31 }}
+    >
       <Image
         style={{ height: "100%", width: "100%", borderRadius: 25 }}
         source={{ uri: image }}
+        resizeMode="contain"
       />
       <View style={{ position: "absolute", height: "100%", width: "100%" }}>
         <View
@@ -45,7 +57,7 @@ const Card = ({ height, width, image, title = "", rating = 0 }) => {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

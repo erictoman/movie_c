@@ -18,9 +18,9 @@ const Categories = ({ categoria, setCategoria }) => {
             onPress={() => {
               setCategoria(elem);
             }}
+            key={elem}
           >
             <View
-              key={elem}
               style={{
                 height: 28,
                 width: 60,

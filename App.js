@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import TabBar from "./components/TabBar";
+import Detail from "./screen/Detail";
 import Home from "./screen/Home";
 import Login from "./screen/Login";
 import Profile from "./screen/Profile";
@@ -92,6 +93,11 @@ export default function App() {
           name="ingreso"
           component={Login}
         />
+        <Stack.Screen
+          name="detalle"
+          component={Detail}
+        />
+
       </Stack.Navigator>
     );
   };

@@ -1,20 +1,24 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import Wrapper from "../components/Wrapper";
-import logo from "../assets/perfil.png";
-import Icon from "react-native-vector-icons/Ionicons";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import Card from "../components/Card";
 import Categories from "../components/Categories";
 import { useEffect, useState } from "react";
 import api, { TOP_RATE, URL_IMAGE } from "../api";
+import { useNavigation } from "@react-navigation/core";
+import Banner from "../components/Banner";
 
 const Home = () => {
   const [categoria, setCategoria] = useState("All");
   const [topRated, setTopRated] = useState([]);
+  const nav = useNavigation();
 
   const getTopRate = async () => {
     const res = await api.get(TOP_RATE);
-    setTopRated(res.results);
+    let resTemp = res.results.map((elem) => {
+      return { ...elem, image: URL_IMAGE + elem.poster_path };
+    });
+    setTopRated(resTemp);
   };
 
   useEffect(() => {
@@ -24,29 +28,7 @@ const Home = () => {
     <Wrapper>
       <View>
         <Categories categoria={categoria} setCategoria={setCategoria} />
-        <Image
-          style={{ height: 204, width: "100%", borderRadius: 39 }}
-          resizeMode="cover"
-          source={logo}
-        />
-        <View style={styles.textoImagen}>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <View>
-              <Text style={{ color: "white", marginBottom: 10 }}>
-                Halo Infinite
-              </Text>
-              <View style={{ flexDirection: "row" }}>
-                <Icon color={"gold"} name="star" size={13} />
-                <Text style={{ color: "white" }}>5.0</Text>
-              </View>
-            </View>
-            <View style={{ flexDirection: "row" }}>
-              <Icon size={37} color={"white"} name="play" />
-            </View>
-          </View>
-        </View>
+        <Banner />
         <View>
           <View
             style={{
@@ -75,10 +57,14 @@ const Home = () => {
           </View>
         </View>
         <ScrollView horizontal contentContainerStyle={{ flexDirection: "row" }}>
-          {topRated.map((elem) => {
+          {topRated?.map((elem) => {
             return (
               <Card
-                image={URL_IMAGE + elem.poster_path}
+                onPress={() => {
+                  nav.navigate("detalle", elem);
+                }}
+                key={elem.id}
+                image={elem.image}
                 height={132}
                 width={153}
                 title={elem.original_title}
@@ -118,16 +104,5 @@ const Home = () => {
     </Wrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  textoImagen: {
-    position: "absolute",
-    height: 204,
-    width: "100%",
-    justifyContent: "flex-end",
-    paddingHorizontal: 18,
-    paddingBottom: 14,
-  },
-});
 
 export default Home;
