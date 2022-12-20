@@ -1,14 +1,12 @@
-import { StatusBar, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const Wrapper = ({ children }) => {
-  StatusBar.currentHeight;
   return <View style={styles.wrapper}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
   wrapper: {
     marginHorizontal: 18,
-    marginTop: StatusBar.currentHeight,
     flex: 1,
     flexDirection: "column",
   },

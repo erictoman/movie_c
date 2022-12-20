@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
 import perfil from "../assets/perfil.png";
 import BotonPerfil from "../components/BotonPerfil";
 import Wrapper from "../components/Wrapper";
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: StatusBar.currentHeight,
   },
   image: {
     flexDirection: "column",
